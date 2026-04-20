@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Form Validation</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #f4f4f4;
+    text-align: center;
+}
+
+.container {
+    width: 300px;
+    margin: 50px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+}
+
+button {
+    padding: 10px;
+    width: 100%;
+    background: #333;
+    color: white;
+    border: none;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Contact Form</h2>
+
+    <form onsubmit="return validateForm()">
+
+        <input type="text" id="name" placeholder="Name">
+        <div id="nameError" class="error"></div>
+
+        <input type="text" id="email" placeholder="Email">
+        <div id="emailError" class="error"></div>
+
+        <input type="text" id="phone" placeholder="Phone">
+        <div id="phoneError" class="error"></div>
+
+        <textarea id="message" placeholder="Message"></textarea>
+        <div id="messageError" class="error"></div>
+
+        <button type="submit">Submit</button>
+
+    </form>
+</div>
+
+<script>
+function validateForm() {
+    let valid = true;
+
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let phone = document.getElementById("phone").value;
+    let message = document.getElementById("message").value;
+
+    // Clear errors
+    document.getElementById("nameError").innerHTML = "";
+    document.getElementById("emailError").innerHTML = "";
+    document.getElementById("phoneError").innerHTML = "";
+    document.getElementById("messageError").innerHTML = "";
+
+    // Name validation
+    if (name === "") {
+        document.getElementById("nameError").innerHTML = "Name is required";
+        valid = false;
+    }
+
+    // Email validation
+    let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    if (!email.match(emailPattern)) {
+        document.getElementById("emailError").innerHTML = "Enter valid email";
+        valid = false;
+    }
+
+    // Phone validation
+    if (phone.length < 10) {
+        document.getElementById("phoneError").innerHTML = "Enter valid phone number";
+        valid = false;
+    }
+
+    // Message validation
+    if (message === "") {
+        document.getElementById("messageError").innerHTML = "Message is required";
+        valid = false;
+    }
+
+    if (valid) {
+        alert("Form submitted successfully!");
+    }
+
+    return valid;
+}
+</script>
+
+</body>
+</html>
+
+OUTPUT :
+Contact Form
+
+[ Name            ]
+[ Email           ]
+[ Phone           ]
+[ Message         ]
+
+[ Submit Button ]
+
+(If errors)
+→ Name is required
+→ Enter valid email
+→ Enter valid phone number
+→ Message is required
